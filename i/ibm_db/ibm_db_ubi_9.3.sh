@@ -2,7 +2,7 @@
 # -----------------------------------------------------------------------------
 #
 # Package        : ibm_db
-# Version        : v3.2.3
+# Version        : v3.2.5
 # Source repo    : https://github.com/ibmdb/python-ibmdb.git
 # Tested on      : UBI 9.3
 # Language       : Python
@@ -19,7 +19,7 @@
 # -----------------------------------------------------------------------------
 
 PACKAGE_NAME=ibm_db
-PACKAGE_VERSION=${1:-v3.2.3}
+PACKAGE_VERSION=${1:-v3.2.5}
 PACKAGE_DIR=python-ibmdb
 PACKAGE_URL=https://github.com/ibmdb/python-ibmdb.git
 
