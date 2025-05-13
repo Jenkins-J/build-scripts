@@ -24,7 +24,7 @@ PACKAGE_URL=https://github.com/IBM/ibm-iae-python-sdk
 PACKAGE_DIR=iaesdk
 
 yum install -y git  python3 python3-devel.ppc64le gcc gcc-c++ make wget sudo cmake
-pip3 install pytest tox nox
+pip3 install pytest tox nox build
 PATH=$PATH:/usr/local/bin/
 
 OS_NAME=$(cat /etc/os-release | grep ^PRETTY_NAME | cut -d= -f2)
@@ -121,3 +121,10 @@ else
     echo "$PACKAGE_NAME | $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | $SOURCE | Fail | Install_success_but_test_Fails"
     exit 2
 fi
+
+if ! python3 -m build --wheel --outdir="./"; then
+    echo "------------------$PACKAGE_NAME:wheel_build_fail-------------------------"
+else
+    echo "------------------$PACKAGE_NAME:wheel_build_success-------------------------"
+fi
+
