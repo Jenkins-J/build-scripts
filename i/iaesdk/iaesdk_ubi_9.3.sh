@@ -82,6 +82,14 @@ else
     fi
 fi
 
+# Build wheel
+if ! python3 -m build --wheel --outdir="./"; then
+    echo "------------------$PACKAGE_NAME:wheel_build_fail-------------------------"
+else
+    echo "------------------$PACKAGE_NAME:wheel_build_success-------------------------"
+fi
+
+
 # Install via pip3
 if !  python3 -m pip install ./; then
         echo "------------------$PACKAGE_NAME:install_fails------------------------"
@@ -96,6 +104,7 @@ if [ $? -eq 0 ]; then
     echo "------------------$PACKAGE_NAME:install_and_test_both_success-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME | $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | $SOURCE | Pass | Both_Install_and_Test_Success"
+    exit 0
 fi
 
 # Run Pytest
@@ -104,6 +113,7 @@ if [ $? -eq 0 ]; then
     echo "------------------$PACKAGE_NAME:install_and_test_both_success-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME | $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | $SOURCE | Pass | Both_Install_and_Test_Success"
+    exit 0
 fi
 
 # Run Nox
@@ -112,18 +122,10 @@ if [ $? -eq 0 ]; then
     echo "------------------$PACKAGE_NAME:install_and_test_both_success-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME | $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | $SOURCE | Pass | Both_Install_and_Test_Success"
+    exit 0
 else
     echo "------------------$PACKAGE_NAME:install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME | $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | $SOURCE | Fail | Install_success_but_test_Fails"
     exit 2
 fi
-
-if ! python3 -m build --wheel --outdir="./"; then
-    echo "------------------$PACKAGE_NAME:wheel_build_fail-------------------------"
-    exit 2
-else
-    echo "------------------$PACKAGE_NAME:wheel_build_success-------------------------"
-    exit 0
-fi
-
