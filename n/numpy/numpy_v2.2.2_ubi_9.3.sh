@@ -137,11 +137,11 @@ if ! python3 -m build --wheel --no-isolation --outdir="$CURRENT_DIR/"; then
             echo "============ Wheel Creation Failed for Python $PYTHON_VERSION ================="
         fi
 fi
-cd ..
 
 python3 -m pip install -r requirements/test_requirements.txt
+python3 -m pip install spin
 
-if ! (python3 -m pytest --pyargs numpy -m 'not slow'); then
+if ! (spin test -v); then
     echo "--------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_success_but_test_Fails"
