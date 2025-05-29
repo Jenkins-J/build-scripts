@@ -23,7 +23,7 @@ PACKAGE_URL=https://github.com/numpy/numpy.git
 PACKAGE_DIR=numpy
 CURRENT_DIR="${PWD}"
 
-yum install -y wget python3.12 python3.12-devel python3.12-pip git gcc-toolset-13-gcc gcc-toolset-13-gcc-c++ gcc-toolset-13-gcc-gfortran lapack-devel pkgconfig openblas-devel make
+yum install -y wget python3.12 python3.12-devel python3.12-pip git gcc-toolset-13-gcc gcc-toolset-13-gcc-c++ gcc-toolset-13-gcc-gfortran pkgconfig openblas-devel make
 export PATH=/opt/rh/gcc-toolset-13/root/usr/bin:$PATH
 ln -sf /usr/bin/python3.12 /usr/bin/python3
 python3 -m pip install --upgrade pip
