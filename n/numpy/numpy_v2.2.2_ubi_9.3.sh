@@ -140,7 +140,6 @@ fi
 
 python3 -m pip install -r requirements/test_requirements.txt
 python3 -m pip install spin
-cd ..
 
 if ! (spin test -v -m full); then
     echo "--------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
