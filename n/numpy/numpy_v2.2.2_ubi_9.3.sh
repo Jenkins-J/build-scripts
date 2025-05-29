@@ -140,8 +140,9 @@ fi
 
 python3 -m pip install -r requirements/test_requirements.txt
 python3 -m pip install spin
+cd ..
 
-if ! (spin test -v); then
+if ! (spin test -v -m full); then
     echo "--------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_success_but_test_Fails"
