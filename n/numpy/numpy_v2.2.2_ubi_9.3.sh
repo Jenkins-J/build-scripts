@@ -23,7 +23,7 @@ PACKAGE_URL=https://github.com/numpy/numpy.git
 PACKAGE_DIR=numpy
 CURRENT_DIR="${PWD}"
 
-yum install -y wget python3.12 python3.12-devel python3.12-pip git gcc-toolset-13-gcc gcc-toolset-13-gcc-c++ gcc-toolset-13-gcc-gfortran make
+yum install -y wget python3.12 python3.12-devel python3.12-pip git gcc-toolset-13-gcc gcc-toolset-13-gcc-c++ gcc-toolset-13-gcc-gfortran lapack-devel pkgconfig openblas-devel make
 export PATH=/opt/rh/gcc-toolset-13/root/usr/bin:$PATH
 ln -sf /usr/bin/python3.12 /usr/bin/python3
 python3 -m pip install --upgrade pip
@@ -119,6 +119,13 @@ case "$UNAME_M" in
         EXTRA_OPTS=""
         ;;
 esac
+
+if ! (python3 -m pip install -r requirements/build_requirements.txt );then
+    echo "------------------$PACKAGE_NAME:Install_fails-------------------------------------"
+    echo "$PACKAGE_URL $PACKAGE_NAME"
+    echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_Fails"
+    exit 1
+fi
 
 if ! (python3 -m pip install . );then
     echo "------------------$PACKAGE_NAME:Install_fails-------------------------------------"
