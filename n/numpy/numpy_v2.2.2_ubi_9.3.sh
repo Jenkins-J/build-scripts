@@ -146,9 +146,8 @@ if ! python3 -m build --wheel --no-isolation --outdir="$CURRENT_DIR/"; then
 fi
 
 python3 -m pip install -r requirements/test_requirements.txt
-cd ..
 
-if ! (python3 -m pytest --pyargs numpy -m 'not slow'); then
+if ! (python3 -m tox -e py312); then
     echo "--------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_success_but_test_Fails"
