@@ -27,7 +27,7 @@ yum install -y wget python3.12 python3.12-devel python3.12-pip git gcc-toolset-1
 export PATH=/opt/rh/gcc-toolset-13/root/usr/bin:$PATH
 ln -sf /usr/bin/python3.12 /usr/bin/python3
 python3 -m pip install --upgrade pip
-python3 -m pip install tox Cython pytest hypothesis wheel meson ninja
+python3 -m pip install tox Cython pytest hypothesis wheel meson ninja spin
 export SITE_PACKAGE_PATH=/usr/local/lib/python3.12/site-packages
 
 #clone and install openblas from source
@@ -147,7 +147,7 @@ fi
 
 python3 -m pip install -r requirements/test_requirements.txt
 
-if ! (python3 -m tox -v -e py312); then
+if ! (spin test -v); then
     echo "--------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_success_but_test_Fails"
