@@ -147,6 +147,8 @@ fi
 
 python3 -m pip install -r requirements/test_requirements.txt
 
+echo $(pwd)
+
 if ! (python3 -m tox -e py312); then
     echo "--------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
