@@ -24,7 +24,7 @@ PACKAGE_URL=https://files.pythonhosted.org/packages/f6/ec/5c658b3a4d99a6d9145030
 PACKAGE_DIR=pyhive
 
 yum install -y git python3.11 python3.11-devel python3.11-pip gcc gcc-c++ make wget sudo cmake
-pip3 install pytest tox nox
+python3.11 -m pip install pytest tox nox
 PATH=$PATH:/usr/local/bin/
 
 OS_NAME=$(cat /etc/os-release | grep ^PRETTY_NAME | cut -d= -f2)
