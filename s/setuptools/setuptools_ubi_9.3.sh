@@ -98,7 +98,7 @@ test_status=1  # 0 = success, non-zero = failure
 # Run tox if tox.ini is present and previous tests failed
 if [ -f "tox.ini" ] && [ $test_status -ne 0 ]; then
     echo "Running tox..."
-    (python3.11 -m tox -e py39) && test_status=0 || test_status=$?
+    (python3.11 -m tox) && test_status=0 || test_status=$?
 fi
 
 # Final test result output
