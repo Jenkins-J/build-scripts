@@ -26,7 +26,7 @@ PACKAGE_DIR=setuptools
 
 # Install dependencies
 yum install -y git python3.11 python3.11-pip python3.11-devel.ppc64le gcc-toolset-13 make wget sudo cmake openssl-devel
-python3.11 -m pip install pytest tox nox 
+python3.11 -m pip install pytest~=8.1 tox
 
 export PATH=$PATH:/usr/local/bin/
 export PATH=/opt/rh/gcc-toolset-13/root/usr/bin:$PATH
