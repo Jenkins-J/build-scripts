@@ -25,7 +25,7 @@ PACKAGE_URL=https://github.com/pypa/setuptools
 PACKAGE_DIR=setuptools
 
 # Install dependencies
-yum install -y git python3.11 python3.11-devel.ppc64le gcc-toolset-13 make wget sudo cmake openssl-devel
+yum install -y git python3.11 python3.11-pip python3.11-devel.ppc64le gcc-toolset-13 make wget sudo cmake openssl-devel
 python3.11 -m pip install pytest tox nox 
 
 export PATH=$PATH:/usr/local/bin/
