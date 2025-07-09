@@ -25,7 +25,7 @@ PACKAGE_URL=https://github.com/nedbat/coveragepy
 PACKAGE_DIR=coverage
 
 # Install dependencies
-yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake
+yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake openssl-devel
 pip3 install pytest tox
 
 export PATH=$PATH:/usr/local/bin/
