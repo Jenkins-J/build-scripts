@@ -26,7 +26,7 @@ PACKAGE_DIR=coverage
 
 # Install dependencies
 yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake openssl-devel
-pip3 install pytest tox
+pip3 install tox
 
 export PATH=$PATH:/usr/local/bin/
 export PATH=/opt/rh/gcc-toolset-13/root/usr/bin:$PATH
@@ -34,19 +34,6 @@ export LD_LIBRARY_PATH=/opt/rh/gcc-toolset-13/root/usr/lib64:$LD_LIBRARY_PATH
 
 OS_NAME=$(grep ^PRETTY_NAME /etc/os-release | cut -d= -f2)
 SOURCE=Github
-
-# Install rust
-if ! command -v rustc &> /dev/null
-then
-    wget https://static.rust-lang.org/dist/rust-1.75.0-powerpc64le-unknown-linux-gnu.tar.gz
-    tar -xzf rust-1.75.0-powerpc64le-unknown-linux-gnu.tar.gz
-    cd rust-1.75.0-powerpc64le-unknown-linux-gnu
-    sudo ./install.sh
-    export PATH=$HOME/.cargo/bin:$PATH
-    rustc -V
-    cargo -V
-    cd ../
-fi
 
 # Clone or extract the package
 if [[ "$PACKAGE_URL" == *github.com* ]]; then
@@ -96,12 +83,6 @@ fi
 test_status=1  # 0 = success, non-zero = failure
 
 python3 -m pip install -r requirements/dev.pip
-
-# Run pytest if any matching test files found
-if ls */test_*.py > /dev/null 2>&1 && [ $test_status -ne 0 ]; then
-    echo "Running pytest..."
-    (python3 -m pytest) && test_status=0 || test_status=$?
-fi
 
 # Run tox if tox.ini is present and previous tests failed
 if [ -f "tox.ini" ] && [ $test_status -ne 0 ]; then
