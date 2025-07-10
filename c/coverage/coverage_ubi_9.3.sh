@@ -82,7 +82,7 @@ fi
 
 test_status=1  # 0 = success, non-zero = failure
 
-python3 -m pip install -r requirements/dev.pip
+make install
 
 # Run tox if tox.ini is present and previous tests failed
 if [ -f "tox.ini" ] && [ $test_status -ne 0 ]; then
