@@ -1,0 +1,13 @@
+{
+   "maintainer": "James-Jenkins",
+   "package_name": "jaydebeapi",
+   "github_url": "https://github.com/baztian/jaydebeapi",
+   "version": "v1.2.3",
+   "default_branch": "master",
+   "build_script": "jaydebeapi_ubi_9.3.sh",
+   "package_dir": "j/jaydebeapi",
+   "docker_build": false,
+   "wheel_build": true,
+   "validate_build_script": true,
+   "use_non_root_user": false
+}
