@@ -26,7 +26,7 @@ PACKAGE_DIR=fsspec
 
 # Install dependencies
 yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake
-pip3 install pytest tox nox
+pip3 install pytest
 
 export PATH=$PATH:/usr/local/bin/
 export PATH=/opt/rh/gcc-toolset-13/root/usr/bin:$PATH
@@ -84,7 +84,7 @@ else
 fi
 
 # Install the package
-if ! python3 -m pip install ./; then
+if ! python3 -m pip install -e .[dev,doc,test_full]; then
     echo "------------------$PACKAGE_NAME:install_fails------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME | $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | $SOURCE | Fail | Install_Failed"
@@ -95,22 +95,12 @@ fi
 
 test_status=1  # 0 = success, non-zero = failure
 
+pip install s3fs --no-deps
+
 # Run pytest if any matching test files found
 if ls */test_*.py > /dev/null 2>&1 && [ $test_status -ne 0 ]; then
     echo "Running pytest..."
-    (python3 -m pytest) && test_status=0 || test_status=$?
-fi
-
-# Run tox if tox.ini is present and previous tests failed
-if [ -f "tox.ini" ] && [ $test_status -ne 0 ]; then
-    echo "Running tox..."
-    (python3 -m tox -e py39) && test_status=0 || test_status=$?
-fi
-
-# Run nox if noxfile.py is present and previous tests failed
-if [ -f "noxfile.py" ] && [ $test_status -ne 0 ]; then
-    echo "Running nox..."
-    (python3 -m nox) && test_status=0 || test_status=$?
+    (python3 -m pytest -v) && test_status=0 || test_status=$?
 fi
 
 # Final test result output
