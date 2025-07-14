@@ -25,8 +25,8 @@ PACKAGE_URL=https://github.com/baztian/jaydebeapi
 PACKAGE_DIR=jaydebeapi
 
 # Install dependencies
-yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake
-pip3 install pytest tox nox
+yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake maven
+pip3 install tox
 
 export PATH=$PATH:/usr/local/bin/
 export PATH=/opt/rh/gcc-toolset-13/root/usr/bin:$PATH
@@ -82,22 +82,15 @@ fi
 
 test_status=1  # 0 = success, non-zero = failure
 
-# Run pytest if any matching test files found
-if ls */test_*.py > /dev/null 2>&1 && [ $test_status -ne 0 ]; then
-    echo "Running pytest..."
-    (python3 -m pytest) && test_status=0 || test_status=$?
-fi
+# setup for testing
+python -m pip install -r dev-requirements.txt
+ci/mvnget.sh org.python:jython-installer:2.7.2
+java -jar jython-installer-2.7.2.jar && rm jython-installer-2.7.2.jar
 
 # Run tox if tox.ini is present and previous tests failed
 if [ -f "tox.ini" ] && [ $test_status -ne 0 ]; then
     echo "Running tox..."
     (python3 -m tox -e py39) && test_status=0 || test_status=$?
-fi
-
-# Run nox if noxfile.py is present and previous tests failed
-if [ -f "noxfile.py" ] && [ $test_status -ne 0 ]; then
-    echo "Running nox..."
-    (python3 -m nox) && test_status=0 || test_status=$?
 fi
 
 # Final test result output
