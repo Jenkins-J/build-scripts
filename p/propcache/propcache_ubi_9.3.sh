@@ -82,6 +82,8 @@ fi
 
 test_status=1  # 0 = success, non-zero = failure
 
+python3 -m pip install -r requirements/test.txt
+
 # Run pytest if any matching test files found
 if ls */test_*.py > /dev/null 2>&1 && [ $test_status -ne 0 ]; then
     echo "Running pytest..."
