@@ -101,7 +101,7 @@ then
   PATH=/root/.cargo/bin/:$PATH
 fi
 
-(make test) && test_status=0 || test_status=$?
+(make) && test_status=0 || test_status=$?
 
 # Final test result output
 if [ $test_status -eq 0 ]; then
