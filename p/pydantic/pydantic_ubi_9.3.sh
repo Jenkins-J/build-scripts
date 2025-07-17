@@ -25,7 +25,7 @@ PACKAGE_URL=https://github.com/pydantic/pydantic
 PACKAGE_DIR=pydantic
 
 # Install dependencies
-yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake g++ lz4-devel zlib-devel
+yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake
 pip3 install pytest tox nox
 
 export PATH=$PATH:/usr/local/bin/
@@ -100,6 +100,8 @@ then
   cargo install --git https://github.com/astral-sh/uv uv
   PATH=/root/.cargo/bin/:$PATH
 fi
+
+make install
 
 (make) && test_status=0 || test_status=$?
 
