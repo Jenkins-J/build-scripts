@@ -25,7 +25,7 @@ PACKAGE_URL=https://github.com/pydantic/pydantic
 PACKAGE_DIR=pydantic
 
 # Install dependencies
-yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake g++
+yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake g++ lz4-devel
 pip3 install pytest tox nox
 
 export PATH=$PATH:/usr/local/bin/
