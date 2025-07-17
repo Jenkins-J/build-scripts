@@ -25,7 +25,7 @@ PACKAGE_URL=https://github.com/pydantic/pydantic
 PACKAGE_DIR=pydantic
 
 # Install dependencies
-yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake
+yum install -y git python3 python3-devel.ppc64le gcc-toolset-13 make wget sudo cmake g++
 pip3 install pytest tox nox
 
 export PATH=$PATH:/usr/local/bin/
@@ -101,8 +101,7 @@ then
   PATH=/root/.cargo/bin/:$PATH
 fi
 
-make install
-(uv run pytest) && test_status=0 || test_status=$?
+(make test) && test_status=0 || test_status=$?
 
 # Final test result output
 if [ $test_status -eq 0 ]; then
